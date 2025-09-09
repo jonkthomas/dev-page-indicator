@@ -188,7 +188,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
   };
 
   // Smart class-based identification with custom mapping
-  const identifyByClasses = (classList: string[], id: string, tagName: string): {
+  const identifyByClasses = (classList: string[]): {
     name: string;
     file?: string;
   } | null => {
@@ -244,7 +244,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
       }
       
       const classList = Array.from(current.classList);
-      const identified = identifyByClasses(classList, current.id, current.tagName.toLowerCase());
+      const identified = identifyByClasses(classList);
       if (identified && identified.name !== 'Unknown') {
         return identified;
       }
@@ -294,7 +294,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
     const id = element.id;
     const tagName = element.tagName.toLowerCase();
     
-    const identified = identifyByClasses(classList, id, tagName);
+    const identified = identifyByClasses(classList);
     if (identified) {
       return {
         ...identified,
@@ -321,7 +321,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
   }, [customComponentMap, enableFiberDetection, maxParentSearchDepth]);
 
   // Handle element hover in selector mode
-  const handleElementHover = useCallback((e: MouseEvent) => {
+  const handleElementHover = useCallback((e: MouseEvent): void => {
     if (!selectorMode) return;
     
     const target = e.target as HTMLElement;
@@ -336,7 +336,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
   }, [selectorMode, getComponentInfo]);
 
   // Handle element click in selector mode
-  const handleElementClick = useCallback((e: MouseEvent) => {
+  const handleElementClick = useCallback((e: MouseEvent): void => {
     if (!selectorMode) return;
     
     const target = e.target as HTMLElement;
@@ -351,7 +351,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
   }, [selectorMode, getComponentInfo]);
 
   // Handle mouse leave to remove highlights
-  const handleElementLeave = useCallback((e: MouseEvent) => {
+  const handleElementLeave = useCallback((e: MouseEvent): void => {
     if (!selectorMode) return;
     
     const target = e.target as HTMLElement;
@@ -361,7 +361,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
   }, [selectorMode]);
 
   // Handle keyboard shortcuts
-  const handleKeyDown = useCallback((e: KeyboardEvent) => {
+  const handleKeyDown = useCallback((e: KeyboardEvent): void => {
     if (e.key === 'Escape' && selectorMode) {
       setSelectorMode(false);
       setHoveredComponent(null);
@@ -394,6 +394,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
         });
       };
     }
+    return undefined;
   }, [selectorMode, handleElementHover, handleElementClick, handleElementLeave]);
 
   // Setup global keyboard shortcuts
@@ -404,6 +405,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
         document.removeEventListener('keydown', handleKeyDown);
       };
     }
+    return undefined;
   }, [isVisible, handleKeyDown]);
 
   useEffect(() => {
