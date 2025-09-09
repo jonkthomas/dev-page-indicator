@@ -1,0 +1,34 @@
+# Source files
+src/
+examples/
+.github/
+
+# Config files
+tsconfig.json
+.gitignore
+.eslintrc*
+.prettierrc*
+
+# Documentation
+SETUP.md
+*.md
+!README.md
+
+# Development
+*.log
+*.test.ts
+*.test.tsx
+coverage/
+.nyc_output/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Keep only dist, README, LICENSE, and package.json for npm package
