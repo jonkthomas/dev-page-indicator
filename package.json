@@ -1,6 +1,6 @@
 {
   "name": "dev-page-indicator",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "A powerful development tool for Next.js/React apps that shows current page, component detection, and smart context copying",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

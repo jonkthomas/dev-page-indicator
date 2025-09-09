@@ -2762,27 +2762,75 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
         "button",
         {
           onClick: () => setIsVisible(true),
-          className: `fixed ${positionStyles[position]} bg-purple-600 hover:bg-purple-700 text-white text-xs px-2 py-1 rounded shadow-lg transition-all duration-200 opacity-50 hover:opacity-100`,
-          style: { zIndex },
+          className: `fixed ${positionStyles[position]}`,
+          style: {
+            zIndex,
+            backgroundColor: "#8b5cf6",
+            color: "white",
+            fontSize: "12px",
+            padding: "4px 8px",
+            borderRadius: "4px",
+            boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+            transition: "all 0.2s",
+            opacity: 0.5
+          },
+          onMouseEnter: (e) => {
+            e.currentTarget.style.opacity = "1";
+            e.currentTarget.style.backgroundColor = "#7c3aed";
+          },
+          onMouseLeave: (e) => {
+            e.currentTarget.style.opacity = "0.5";
+            e.currentTarget.style.backgroundColor = "#8b5cf6";
+          },
           title: "Show page indicator",
           children: "\u{1F441}\uFE0F"
         }
       )
     ] });
   }
+  (0, import_react.useEffect)(() => {
+    const styleId = "dev-page-indicator-styles";
+    if (!document.getElementById(styleId)) {
+      const style = document.createElement("style");
+      style.id = styleId;
+      style.textContent = `
+        @keyframes dev-page-indicator-pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.5; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+    return () => {
+      const style = document.getElementById(styleId);
+      if (style) {
+        style.remove();
+      }
+    };
+  }, []);
   return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react_hot_toast.Toaster, { position: "top-center" }),
     /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
       "div",
       {
         ref: overlayRef,
-        className: `fixed ${positionStyles[position]} bg-black/90 backdrop-blur-sm text-white px-3 py-2 rounded-lg shadow-lg border border-purple-500/30 max-w-sm`,
-        style: { zIndex },
+        className: `fixed ${positionStyles[position]}`,
+        style: {
+          zIndex,
+          backgroundColor: "rgba(17, 24, 39, 0.95)",
+          backdropFilter: "blur(4px)",
+          color: "white",
+          padding: "8px 12px",
+          borderRadius: "8px",
+          boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+          border: "1px solid rgba(139, 92, 246, 0.3)",
+          maxWidth: "24rem"
+        },
         children: [
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center justify-between gap-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "flex items-center gap-2", children: [
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-purple-400 text-xs font-semibold", children: "DEV" }),
-              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-400 text-xs", children: "|" }),
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center", justifyContent: "space-between", gap: "8px" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { display: "flex", alignItems: "center", gap: "8px" }, children: [
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#a78bfa", fontSize: "12px", fontWeight: "600" }, children: "DEV" }),
+              /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#9ca3af", fontSize: "12px" }, children: "|" }),
               /* @__PURE__ */ (0, import_jsx_runtime.jsx)(
                 "button",
                 {
@@ -2790,7 +2838,27 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
                     setSelectorMode(!selectorMode);
                     setSelectedComponent(null);
                   },
-                  className: `px-2 py-1 text-xs rounded transition-all duration-200 ${selectorMode ? "bg-purple-600 text-white animate-pulse" : "bg-gray-700 hover:bg-gray-600 text-gray-300"}`,
+                  style: {
+                    padding: "4px 8px",
+                    fontSize: "12px",
+                    borderRadius: "4px",
+                    transition: "all 0.2s",
+                    backgroundColor: selectorMode ? "#8b5cf6" : "#374151",
+                    color: selectorMode ? "white" : "#d1d5db",
+                    animation: selectorMode ? "dev-page-indicator-pulse 2s infinite" : "none",
+                    border: "none",
+                    cursor: "pointer"
+                  },
+                  onMouseEnter: (e) => {
+                    if (!selectorMode) {
+                      e.currentTarget.style.backgroundColor = "#4b5563";
+                    }
+                  },
+                  onMouseLeave: (e) => {
+                    if (!selectorMode) {
+                      e.currentTarget.style.backgroundColor = "#374151";
+                    }
+                  },
                   title: selectorMode ? "Exit selector mode" : "Enable component selector",
                   children: selectorMode ? "\u{1F3AF} Selecting..." : "\u{1F3AF} Select"
                 }
@@ -2799,7 +2867,25 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
                 "button",
                 {
                   onClick: handleCopyFullContext,
-                  className: "px-2 py-1 text-xs rounded bg-green-700 hover:bg-green-600 text-white transition-all duration-200 flex items-center gap-1",
+                  style: {
+                    padding: "4px 8px",
+                    fontSize: "12px",
+                    borderRadius: "4px",
+                    backgroundColor: "#047857",
+                    color: "white",
+                    transition: "all 0.2s",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "4px",
+                    border: "none",
+                    cursor: "pointer"
+                  },
+                  onMouseEnter: (e) => {
+                    e.currentTarget.style.backgroundColor = "#059669";
+                  },
+                  onMouseLeave: (e) => {
+                    e.currentTarget.style.backgroundColor = "#047857";
+                  },
                   title: "Copy full context (page + component)",
                   children: "\u{1F4CB} Copy All"
                 }
@@ -2809,25 +2895,56 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
               "button",
               {
                 onClick: () => setIsVisible(false),
-                className: "text-gray-400 hover:text-white transition-colors text-xs",
+                style: {
+                  color: "#9ca3af",
+                  fontSize: "12px",
+                  transition: "color 0.2s",
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  padding: "2px"
+                },
+                onMouseEnter: (e) => {
+                  e.currentTarget.style.color = "white";
+                },
+                onMouseLeave: (e) => {
+                  e.currentTarget.style.color = "#9ca3af";
+                },
                 title: "Hide indicator",
                 children: "\u2715"
               }
             )
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "mt-2", children: [
-            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-xs text-gray-300 flex items-center gap-1", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { marginTop: "8px" }, children: [
+            /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { fontSize: "12px", color: "#d1d5db", display: "flex", alignItems: "center", gap: "4px" }, children: [
               "Page:",
-              justCopied && !selectedComponent && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-green-400 text-xs animate-pulse", children: "\u2713 Copied!" })
+              justCopied && !selectedComponent && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#34d399", fontSize: "12px", animation: "dev-page-indicator-pulse 2s infinite" }, children: "\u2713 Copied!" })
             ] }),
             /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(
               "div",
               {
-                className: "text-sm font-mono text-green-400 break-all cursor-pointer hover:text-green-300 transition-colors duration-200 select-none group flex items-center gap-1",
+                style: {
+                  fontSize: "14px",
+                  fontFamily: "monospace",
+                  color: "#34d399",
+                  wordBreak: "break-all",
+                  cursor: "pointer",
+                  transition: "color 0.2s",
+                  userSelect: "none",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px"
+                },
+                onMouseEnter: (e) => {
+                  e.currentTarget.style.color = "#86efac";
+                },
+                onMouseLeave: (e) => {
+                  e.currentTarget.style.color = "#34d399";
+                },
                 onClick: () => handleCopyPath(pageFile),
                 title: "Click to copy path",
                 children: [
-                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "text-gray-500 group-hover:text-gray-400 transition-colors", children: "\u{1F4CB}" }),
+                  /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { style: { color: "#6b7280", transition: "color 0.2s" }, children: "\u{1F4CB}" }),
                   pageFile
                 ]
               }
@@ -2872,7 +2989,7 @@ ${selectedComponent.props && selectedComponent.props.length > 0 ? `- **Classes:*
               ] })
             ] })
           ] }),
-          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "mt-2 pt-2 border-t border-gray-700", children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { className: "text-xs text-gray-400 font-mono", children: [
+          /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { style: { marginTop: "8px", paddingTop: "8px", borderTop: "1px solid #374151" }, children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { style: { fontSize: "12px", color: "#9ca3af", fontFamily: "monospace" }, children: [
             "Route: ",
             pathname
           ] }) }),
