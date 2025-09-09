@@ -6,6 +6,23 @@ A powerful development tool for Next.js and React applications that provides ins
 ![License](https://img.shields.io/npm/l/dev-page-indicator)
 ![Size](https://img.shields.io/bundlephobia/minzip/dev-page-indicator)
 
+## 🚀 Quick Install & Setup
+
+```bash
+npm install --save-dev github:jonkthomas/dev-page-indicator
+```
+
+**After installation, you'll see setup instructions in your terminal!** 
+
+Or copy this for AI tools (Cursor/Copilot):
+```
+Add dev-page-indicator (already installed):
+1. Import: import { DevPageIndicator } from 'dev-page-indicator';
+2. Add <DevPageIndicator /> before </body> tag
+```
+
+📖 [Full Integration Guide](https://github.com/jonkthomas/dev-page-indicator/blob/main/INTEGRATION.md)
+
 ## ✨ Features
 
 - 📍 **Page Detection** - Automatically shows current page file path
@@ -39,27 +56,6 @@ pnpm add -D dev-page-indicator
 npm install --save-dev github:jonkthomas/dev-page-indicator
 ```
 
-## 🤖 AI Tool Integration (Cursor, GitHub Copilot, etc.)
-
-Copy this prompt to quickly add DevPageIndicator to your project:
-
-```
-Please add the dev-page-indicator to my project. It's already installed via npm.
-
-For Next.js App Router:
-1. Import at the top of app/layout.tsx: import { DevPageIndicator } from 'dev-page-indicator';
-2. Add <DevPageIndicator /> right before the closing </body> tag in the root layout
-
-For Next.js Pages Router:
-1. Import at the top of pages/_app.tsx: import { DevPageIndicator } from 'dev-page-indicator';
-2. Add <DevPageIndicator /> right before the closing fragment in the App component
-
-For React (Vite/CRA):
-1. Import at the top of App.tsx: import { DevPageIndicator } from 'dev-page-indicator';
-2. Add <DevPageIndicator /> at the bottom of the App component, before the closing div
-
-Only show this component in development mode. It automatically hides in production.
-```
 
 ## 📦 Quick Start
 
