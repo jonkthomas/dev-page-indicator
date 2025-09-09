@@ -7,14 +7,17 @@
   "types": "dist/index.d.ts",
   "files": [
     "dist",
+    "scripts",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "INTEGRATION.md"
   ],
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --dts --external react",
     "dev": "tsup src/index.tsx --format cjs,esm --dts --external react --watch",
     "lint": "eslint src",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "postinstall": "node scripts/postinstall.js || true"
   },
   "keywords": [
     "nextjs",
