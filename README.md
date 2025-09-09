@@ -61,10 +61,30 @@ npm install --save-dev github:jonkthomas/dev-page-indicator
 
 ### Next.js App Router
 
-Add to your root layout (`app/layout.tsx`):
+**Important:** Since DevPageIndicator is a client component, you need to handle it properly in Next.js 13+ server components.
+
+Create a client wrapper (`components/DevIndicator.tsx`):
 
 ```tsx
-import { DevPageIndicator } from 'dev-page-indicator';
+'use client';
+
+import dynamic from 'next/dynamic';
+
+const DevPageIndicator = dynamic(
+  () => import('dev-page-indicator').then(mod => mod.DevPageIndicator),
+  { ssr: false }
+);
+
+export default function DevIndicator() {
+  if (process.env.NODE_ENV !== 'development') return null;
+  return <DevPageIndicator />;
+}
+```
+
+Then add to your root layout (`app/layout.tsx`):
+
+```tsx
+import DevIndicator from '@/components/DevIndicator';
 
 export default function RootLayout({
   children,
@@ -75,12 +95,14 @@ export default function RootLayout({
     <html lang="en">
       <body>
         {children}
-        <DevPageIndicator />
+        <DevIndicator />
       </body>
     </html>
   );
 }
 ```
+
+📖 [Full Next.js Setup Guide](https://github.com/jonkthomas/dev-page-indicator/blob/main/NEXT_JS_SETUP.md)
 
 ### Next.js Pages Router
 
