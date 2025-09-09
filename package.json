@@ -26,11 +26,11 @@
     "developer-experience",
     "dx"
   ],
-  "author": "Your Name",
+  "author": "John Thomas",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/dev-page-indicator"
+    "url": "https://github.com/jonkthomas/dev-page-indicator"
   },
   "peerDependencies": {
     "react": ">=16.8.0",

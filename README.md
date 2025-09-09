@@ -36,7 +36,7 @@ pnpm add -D dev-page-indicator
 
 ### Install from GitHub (Latest)
 ```bash
-npm install --save-dev github:yourusername/dev-page-indicator
+npm install --save-dev github:jonkthomas/dev-page-indicator
 ```
 
 ## 📦 Quick Start
@@ -229,7 +229,7 @@ The tool copies context in both plain text and markdown:
 Clone and install:
 
 ```bash
-git clone https://github.com/yourusername/dev-page-indicator.git
+git clone https://github.com/jonkthomas/dev-page-indicator.git
 cd dev-page-indicator
 npm install
 ```
@@ -298,8 +298,8 @@ MIT License - see the [LICENSE](LICENSE) file for details
 
 ## 💬 Support
 
-- [GitHub Issues](https://github.com/yourusername/dev-page-indicator/issues)
-- [Discussions](https://github.com/yourusername/dev-page-indicator/discussions)
+- [GitHub Issues](https://github.com/jonkthomas/dev-page-indicator/issues)
+- [Discussions](https://github.com/jonkthomas/dev-page-indicator/discussions)
 
 ---
 
